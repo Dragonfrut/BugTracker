@@ -2,7 +2,7 @@ import logging.config
 import os
 import sys
 
-
+#why
 def get(variable):
     """
     To be used over os.environ.get() to avoid deploying local/dev keys in production. Forced
@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'apps.socialmedia',
     'apps.user',
     'apps.bugtracker',
-    
     # ___CHANGEME___
     # Example apps
     'apps.workerexample',
