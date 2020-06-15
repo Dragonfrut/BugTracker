@@ -58,7 +58,8 @@ INSTALLED_APPS = [
     'apps.mail',
     'apps.socialmedia',
     'apps.user',
-
+    'apps.bugtracker',
+    
     # ___CHANGEME___
     # Example apps
     'apps.workerexample',
@@ -104,7 +105,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql',
-            'NAME': 'django',  # ___CHANGEME___
+            'NAME': 'bugtracker',  
             'USER': 'postgres',
             'PASSWORD': 'postgres'
         },
