@@ -59,7 +59,6 @@ INSTALLED_APPS = [
     'apps.socialmedia',
     'apps.user',
     'apps.bugtracker',
-
     # ___CHANGEME___
     # Example apps
     'apps.workerexample',
