@@ -10,18 +10,59 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+
+class ProjectUsers(models.Model):
+    project = models.ForeignKey(
+        Project,
+        db_index=True,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False
+    )
+
+    user = models.ForeignKey(
+        User,
+        db_index=True,
+        on_delete=models.CASCADE,
+        null=False,
+        blank=False
+    )
+
+      
+    def __str__(self):
+        return ''
+    
+    class Meta:
+        unique_together = (
+            ('project', 'user'),
+        )
+        verbose_name_plural = 'Project Users'
+
+
 #Bug Data Model
 class Bug(models.Model):
     #Constants for severity dropdown
     BUG_SEVERITY_MILD = 'mild'
     BUG_SEVERITY_MEDIUM = 'meduim'
     BUG_SEVERITY_HOT = 'hot'
+    #Constants for bug status
+    BUG_STATUS_OPEN ='open'
+    BUG_STATUS_PENDING = 'pending'
+    BUG_STATUS_RESOLVED = 'resolved'
+    BUG_STATUS_CLOSED = 'closed'
 
     #Creates a list of lists
     BUG_SEVERITY_CHOICES = (
         (BUG_SEVERITY_MILD, 'Mild'),
         (BUG_SEVERITY_MEDIUM, 'Medium'),
         (BUG_SEVERITY_HOT, 'Hot')
+    )
+
+    BUG_STATUS_CHOICES = (
+        (BUG_STATUS_OPEN, 'Open'),
+        (BUG_STATUS_PENDING, 'Pending'),
+        (BUG_STATUS_RESOLVED, 'Resolved'),
+        (BUG_STATUS_CLOSED, 'Closed')
     )
 
     #the user that created the bug
@@ -42,8 +83,16 @@ class Bug(models.Model):
         default = BUG_SEVERITY_MILD,
         choices = BUG_SEVERITY_CHOICES,
         max_length = 6
-    ) 
+    )
+    
+    #the status dropdown with default open
+    status = models.CharField(
+        default = BUG_STATUS_OPEN,
+        choices = BUG_STATUS_CHOICES,
+        max_length = 8
+    )
 
+    title = models.TextField(default = '')
     description = models.TextField()
 
     #Operating system
