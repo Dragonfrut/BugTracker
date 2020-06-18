@@ -67,14 +67,17 @@ class BugAdmin(admin.ModelAdmin):
     ordering = ('date_created', 'project__name', 'status')
     list_filter = ('status', 'severity')
 
+    #gets the bug form
     def get_form(self, request, obj=None, **kwargs):
         self.obj = obj
         return super(BugAdmin, self).get_form(request, obj, **kwargs)
 
     def formfield_for_foreignkey(self, db_field, request, **kwargs):
-        # limit options to the parent assessment
-        if db_field.name == "assigned_user":
+        #limit options to the parent assessment
+        #looks specifically for assigned user
+        if db_field.name == "assigned_user" and self.obj:
             kwargs["queryset"] = (
+                #filters for only users that are in the project the bug is in
                 User.objects.filter(
                     id__in=ProjectUsers.objects.filter(
                         project=self.obj.project
