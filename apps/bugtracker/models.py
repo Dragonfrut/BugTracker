@@ -11,6 +11,7 @@ class Project(models.Model):
         return self.name
 
 
+#ProjectUsers is a bridge between project and user
 class ProjectUsers(models.Model):
     project = models.ForeignKey(
         Project,
@@ -32,6 +33,7 @@ class ProjectUsers(models.Model):
     def __str__(self):
         return ''
     
+    #fixes a pluralization issue and forces project and user to be unique together
     class Meta:
         unique_together = (
             ('project', 'user'),
