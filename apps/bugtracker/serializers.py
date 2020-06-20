@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Bug
 
 class BugSerializer(serializers.ModelSerializer):
-
+    reported_by = serializers.StringRelatedField()
     class Meta:
         model = Bug
         fields = (
