@@ -6,6 +6,8 @@ class User(AbstractEmailUser):
     first_name = models.CharField(max_length=30, default='')
     last_name = models.CharField(max_length=30, default='')
     
+    def __str__(self):
+        return self.get_full_name()
 
     def get_full_name(self):
         #return self.first_name + ' ' + self.last_name
