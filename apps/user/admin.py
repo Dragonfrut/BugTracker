@@ -9,9 +9,11 @@ REQUIRED_FIELDS = (USERNAME_FIELD,) + tuple(User.REQUIRED_FIELDS)
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
-    list_display = ('email', 'is_active')
+    list_display = ('get_full_name', 'email', 'is_active')
     fieldsets = (
         (None, {'fields': REQUIRED_FIELDS + (
+            'first_name',
+            'last_name',
             'is_active',
             'is_staff',
             'is_superuser',
@@ -24,6 +26,8 @@ class UserAdmin(DjangoUserAdmin):
     )
     add_fieldsets = (
         (None, {'fields': REQUIRED_FIELDS + (
+            'first_name',
+            'last_name',
             'password1',
             'password2',
         )}),
