@@ -48,6 +48,7 @@ class BugAdmin(admin.ModelAdmin):
             'date_created',
             'date_updated',
             'project',
+            'operating_system',
             'severity',
             'status',
             'title',
