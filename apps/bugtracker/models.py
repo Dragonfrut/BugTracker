@@ -52,6 +52,13 @@ class Bug(models.Model):
     BUG_STATUS_PENDING = 'pending'
     BUG_STATUS_RESOLVED = 'resolved'
     BUG_STATUS_CLOSED = 'closed'
+    #Constants for operating systems
+    BUG_OS_WINDOWS = 'windows'
+    BUG_OS_LINUX = 'linux'
+    BUG_OS_MAC = 'mac'
+    BUG_OS_ANDROID = 'android'
+    BUG_OS_IOS = 'ios'
+
 
     #Creates a list of lists
     BUG_SEVERITY_CHOICES = (
@@ -65,6 +72,14 @@ class Bug(models.Model):
         (BUG_STATUS_PENDING, 'Pending'),
         (BUG_STATUS_RESOLVED, 'Resolved'),
         (BUG_STATUS_CLOSED, 'Closed')
+    )
+
+    BUG_OS_CHOICES = (
+        (BUG_OS_WINDOWS, 'Windows'),
+        (BUG_OS_LINUX, 'Linux'),
+        (BUG_OS_MAC, 'Mac'),
+        (BUG_OS_ANDROID, 'Android'),
+        (BUG_OS_IOS, 'ios')
     )
 
     #the user that created the bug
@@ -92,6 +107,12 @@ class Bug(models.Model):
         default = BUG_STATUS_OPEN,
         choices = BUG_STATUS_CHOICES,
         max_length = 8
+    )
+
+    operating_system = models.CharField(
+        default = BUG_OS_WINDOWS,
+        choices = BUG_OS_CHOICES,
+        max_length = 7
     )
 
     title = models.TextField(default = '')
