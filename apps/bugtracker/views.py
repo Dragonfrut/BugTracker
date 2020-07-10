@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework import generics, permissions, status
 from rest_framework_tracking.mixins import LoggingMixin
-from .models import Bug, Project
-from .serializers import BugSerializer, ProjectSerializer
+from .models import Bug, Project, ProjectUsers, User
+from .serializers import BugSerializer, ProjectSerializer, AssignedSerializer
 from rest_framework.response import Response
 # Create your views here.
 
@@ -36,6 +36,19 @@ class ProjectListView(generics.ListAPIView):
         permissions.IsAuthenticated,
     )
 
+class AssignedListView(generics.ListAPIView):
+    queryset = ProjectUsers.objects.all()
+    serializer_class = AssignedSerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
+    
+    def get_queryset(self):
+        
+        self.queryset = ProjectUsers.objects.filter(project__id=self.kwargs['project_id'])
+        
+        return self.queryset
+    
 
 
         
