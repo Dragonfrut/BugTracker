@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Bug, Project
+from .models import Bug, Project, ProjectUsers
 
 class BugSerializer(serializers.ModelSerializer):
     reported_by = serializers.StringRelatedField()
@@ -23,5 +23,19 @@ class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
         fields = (
-            'name',
+            'id',
+            'name'
+        )
+
+class AssignedSerializer(serializers.ModelSerializer):
+    project_name = serializers.StringRelatedField(source='project')
+    user_name = serializers.StringRelatedField(source='user')
+
+    class Meta:
+        model = ProjectUsers
+        fields = (
+            'project',
+            'user',
+            'project_name',
+            'user_name'
         )
