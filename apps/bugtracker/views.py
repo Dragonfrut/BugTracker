@@ -6,7 +6,7 @@ from .serializers import BugSerializer, ProjectSerializer, AssignedSerializer
 from rest_framework.response import Response
 # Create your views here.
 
-class BugListView(generics.ListAPIView):
+class BugListView(generics.ListCreateAPIView):
     queryset = Bug.objects.all()
     serializer_class = BugSerializer
     permission_classes = (
