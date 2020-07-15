@@ -2,11 +2,12 @@ from rest_framework import serializers
 from .models import Bug, Project, ProjectUsers
 
 class BugSerializer(serializers.ModelSerializer):
-    reported_by = serializers.StringRelatedField()
+    reported_by_name = serializers.StringRelatedField(source='reported_by', read_only=True)
     class Meta:
         model = Bug
         fields = (
             'reported_by',
+            'reported_by_name',
             'date_created',
             'date_updated',
             'project',
