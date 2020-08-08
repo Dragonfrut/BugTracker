@@ -6,6 +6,7 @@ class BugSerializer(serializers.ModelSerializer):
     class Meta:
         model = Bug
         fields = (
+            'id',
             'reported_by',
             'reported_by_name',
             'date_created',
