@@ -19,6 +19,10 @@ class BugSerializer(serializers.ModelSerializer):
             'assigned_user'
         )
 
+    def create(self, validated_data):
+        validated_data['reported_by'] = self.context['request'].user
+        return super().create(validated_data)
+
 class ProjectSerializer(serializers.ModelSerializer):
     
     class Meta:
