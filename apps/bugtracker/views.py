@@ -15,7 +15,7 @@ class BugListView(generics.ListCreateAPIView):
     )
 
 
-class BugRetrieveUpdateDeleteView(generics.RetrieveUpdateDeleteAPIView):
+class BugRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Bug.objects.all()
     serializer_class = BugSerializer
     permission_classes = (
