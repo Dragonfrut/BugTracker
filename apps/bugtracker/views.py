@@ -4,6 +4,7 @@ from rest_framework_tracking.mixins import LoggingMixin
 from .models import Bug, Project, ProjectUsers, User
 from .serializers import BugSerializer, ProjectSerializer, AssignedSerializer
 from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 class BugListView(generics.ListCreateAPIView):
@@ -12,6 +13,17 @@ class BugListView(generics.ListCreateAPIView):
     permission_classes = (
         permissions.IsAuthenticated,
     )
+
+
+class BugRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Bug.objects.all()
+    serializer_class = BugSerializer
+    permission_classes = (
+        permissions.IsAuthenticated,
+    )
+
+    def get_object(self):
+        return get_object_or_404(Bug, pk=self.kwargs['bug_id'])
     
 
 class AttributesListView(generics.GenericAPIView):
