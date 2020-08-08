@@ -12,10 +12,6 @@ class BugListView(generics.ListCreateAPIView):
     permission_classes = (
         permissions.IsAuthenticated,
     )
-
-    def create(self, validated_data):
-        validated_data['reported_by'] = self.context['request'].user
-        return super().create(validated_data)
     
 
 class AttributesListView(generics.GenericAPIView):
