@@ -12,6 +12,7 @@ class BugListView(generics.ListCreateAPIView):
     permission_classes = (
         permissions.IsAuthenticated,
     )
+    
 
 class AttributesListView(generics.GenericAPIView):
     permission_classes = (
